@@ -3,7 +3,7 @@
 
 #include <cgreen/internal/mocks_internal.h>
 #include <cgreen/internal/stringify_token.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include <cgreen/reporter.h>
 
 #ifdef __cplusplus

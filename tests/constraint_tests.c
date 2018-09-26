@@ -1,6 +1,6 @@
 #include <cgreen/boxed_double.h>
 #include <cgreen/cgreen.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include <stdlib.h>
 
 #ifdef __cplusplus

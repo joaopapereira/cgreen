@@ -1,6 +1,6 @@
 #include <cgreen/internal/cpp_assertions.h>
 #include <cgreen/internal/c_assertions.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include <stdint.h>
 #include <string.h>
 #include <string>

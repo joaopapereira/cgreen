@@ -32,7 +32,7 @@ set(cgreen_SRCS
   breadcrumb.c
   cgreen_time.c
   cgreen_value.c
-  constraint.c
+  constraints.c
   constraint_syntax_helpers.c
   cute_reporter.c
   cdash_reporter.c

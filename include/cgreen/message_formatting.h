@@ -1,7 +1,7 @@
 #ifndef CGREEN_MESSAGE_FORMATTING_H
 #define CGREEN_MESSAGE_FORMATTING_H
 
-#include <cgreen/constraint.h>
+#include "internal/constraints.h"
 #include <stdint.h>
 
 #ifdef __cplusplus

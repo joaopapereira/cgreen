@@ -3,8 +3,8 @@
 
 #include "internal/assertions_internal.h"
 #include "internal/stringify_token.h"
+#include "internal/constraints.h"
 
-#include <cgreen/constraint.h>
 #include <cgreen/reporter.h>
 #include <stdint.h>
 

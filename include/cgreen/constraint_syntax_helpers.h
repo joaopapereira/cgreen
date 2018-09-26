@@ -2,7 +2,7 @@
 #define CONSTRAINT_SYNTAX_HELPERS_HEADER
 
 
-#include <cgreen/constraint.h>
+#include "internal/constraints.h"
 #ifdef __cplusplus
 #include <cgreen/cpp_constraint.h>
 #endif

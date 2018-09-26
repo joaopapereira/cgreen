@@ -1,4 +1,4 @@
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include <string>
 
 namespace cgreen {

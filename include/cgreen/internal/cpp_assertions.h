@@ -1,7 +1,7 @@
 #ifndef INTERNAL_CPP_ASSERTIONS_HEADER
 #define INTERNAL_CPP_ASSERTIONS_HEADER
 
-#include <cgreen/constraint.h>
+#include "constraints.h"
 #include <stdint.h>
 #include <string>
 #include <typeinfo>

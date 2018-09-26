@@ -1,7 +1,7 @@
 #ifndef C_ASSERTIONS_HEADER
 #define C_ASSERTIONS_HEADER
 
-#include <cgreen/constraint.h>
+#include "constraints.h"
 #include <inttypes.h>
 
 #include "stringify_token.h"

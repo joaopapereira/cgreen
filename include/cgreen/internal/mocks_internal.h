@@ -3,7 +3,7 @@
 
 #include <cgreen/internal/mock_table.h>
 #include <cgreen/internal/function_macro.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include <cgreen/reporter.h>
 #include <cgreen/vector.h>
 #include <stdint.h>

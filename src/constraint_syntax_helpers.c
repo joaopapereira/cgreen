@@ -1,5 +1,5 @@
 #include <cgreen/constraint_syntax_helpers.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 #include "constraint_internal.h"
 #include <cgreen/message_formatting.h>
 #include <stdbool.h>

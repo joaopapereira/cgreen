@@ -2,7 +2,7 @@
 #define CGREEN_CPP_CONSTRAINT
 
 
-#include <cgreen/constraint.h>
+#include "internal/constraints.h"
 #include <string>
 
 namespace cgreen {

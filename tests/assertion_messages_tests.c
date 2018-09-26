@@ -1,6 +1,6 @@
 #include <cgreen/cgreen.h>
 #include <cgreen/mocks.h>
-#include <cgreen/constraint.h>
+#include <cgreen/internal/constraints.h>
 
 #include <stdio.h>
 #include <stdlib.h>
