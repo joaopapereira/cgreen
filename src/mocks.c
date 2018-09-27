@@ -70,11 +70,11 @@ static void report_mock_parameter_name_not_found(TestReporter *test_reporter,
 static void destroy_expectation_if_time_to_die(RecordedExpectation *expectation);
 
 static bool
-is_sideeffect_constraint(const Constraint *constraint);
+is_sideeffect_constraint(const CGreenConstraint *constraint);
 static void
 apply_sideeffect(TestReporter *test_reporter,
                  const RecordedExpectation *expectation,
-                 Constraint *constraint);
+                 CGreenConstraint *constraint);
 
 void cgreen_mocks_are(CgreenMockMode mock_mode) {
     cgreen_mocks_are_ = mock_mode;
@@ -100,7 +100,7 @@ int number_of_parameter_constraints_in(const CgreenVector* constraints) {
     int i, parameters = 0;
 
     for (i = 0; i < cgreen_vector_size(constraints); i++) {
-        Constraint *constraint = (Constraint *)cgreen_vector_get(constraints, i);
+        CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(constraints, i);
 
         if (is_comparing(constraint)) {
            parameters++;
@@ -214,7 +214,7 @@ intptr_t mock_(TestReporter* test_reporter, const char *function, const char *mo
     // returning a double.
 
     for (i = 0; i < cgreen_vector_size(expectation->constraints); i++) {
-        Constraint *constraint = (Constraint *)cgreen_vector_get(expectation->constraints, i);
+        CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(expectation->constraints, i);
 
         if (is_sideeffect_constraint(constraint)) {
             apply_sideeffect(test_reporter, expectation, constraint);
@@ -301,7 +301,7 @@ static
 void
 apply_sideeffect(TestReporter *test_reporter,
                  const RecordedExpectation *expectation,
-                 Constraint *constraint)
+                 CGreenConstraint *constraint)
 {
     CgreenValue actual;
     constraint->execute(
@@ -314,7 +314,7 @@ apply_sideeffect(TestReporter *test_reporter,
 }
 static
 bool
-is_sideeffect_constraint(const Constraint *constraint) { return constraint->type == CALL; }
+is_sideeffect_constraint(const CGreenConstraint *constraint) { return constraint->type == CALL; }
 
 static CgreenVector *create_vector_of_actuals(va_list actuals, int count) {
     int i;
@@ -327,9 +327,9 @@ static CgreenVector *create_vector_of_actuals(va_list actuals, int count) {
 }
 
 
-static Constraint *create_appropriate_equal_constraint_for(const char *parameter_name,
+static CGreenConstraint *create_appropriate_equal_constraint_for(const char *parameter_name,
                                                            CgreenValue actual) {
-    Constraint *constraint;
+    CGreenConstraint *constraint;
     if (actual.type == DOUBLE)
         constraint = create_equal_to_double_constraint(actual.value.double_value,
                                                        parameter_name);
@@ -346,14 +346,14 @@ static CgreenVector *create_equal_value_constraints_for(CgreenVector *parameter_
     for (i = 0; i < cgreen_vector_size(parameter_names); i++) {
         const char* parameter_name = (const char*)cgreen_vector_get(parameter_names, i);
         CgreenValue actual = *(CgreenValue*)cgreen_vector_get(actual_values, i);
-        Constraint *constraint = create_appropriate_equal_constraint_for(parameter_name, actual);
+        CGreenConstraint *constraint = create_appropriate_equal_constraint_for(parameter_name, actual);
         cgreen_vector_add(constraints, constraint);
     }
     return constraints;
 }
 
 
-Constraint *when_(const char *parameter, Constraint* constraint) {
+CGreenConstraint *when_(const char *parameter, CGreenConstraint* constraint) {
     constraint->parameter_name = parameter;
     return constraint;
 }
@@ -593,7 +593,7 @@ void print_learned_mocks(void) {
         const char *function_name = expectation->function;
         fprintf(stderr, "\texpect(%s", function_name);
         for (c = 0; c < cgreen_vector_size(expectation->constraints); c++) {
-            Constraint *constraint = (Constraint *)cgreen_vector_get(expectation->constraints, c);
+            CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(expectation->constraints, c);
             if (constraint->expected_value.type == DOUBLE)
                 fprintf(stderr, ", when(%s, is_equal_to_double(%f))", constraint->expected_value_name,
                         constraint->expected_value.value.double_value);
@@ -622,8 +622,8 @@ static CgreenVector *create_constraints_vector(void) {
 
 static CgreenVector *constraints_vector_from_va_list(va_list constraints) {
     CgreenVector *vector = create_constraints_vector();
-    Constraint *constraint;
-    while ((constraint = va_arg(constraints, Constraint *)) != (Constraint *)0) {
+    CGreenConstraint *constraint;
+    while ((constraint = va_arg(constraints, CGreenConstraint *)) != (CGreenConstraint *)0) {
         cgreen_vector_add(vector, constraint);
     }
     return vector;
@@ -746,7 +746,7 @@ static void apply_any_read_only_parameter_constraints(RecordedExpectation *expec
     int i;
 
     for (i = 0; i < cgreen_vector_size(expectation->constraints); i++) {
-        Constraint *constraint = (Constraint *)cgreen_vector_get(expectation->constraints, i);
+        CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(expectation->constraints, i);
 
         if (constraint_is_not_for_parameter(constraint, parameter)) {
             continue;
@@ -769,7 +769,7 @@ static void apply_any_read_only_parameter_constraints(RecordedExpectation *expec
 static void apply_any_content_setting_parameter_constraints(RecordedExpectation *expectation, const char *parameter, CgreenValue actual, TestReporter* test_reporter) {
     int i;
     for (i = 0; i < cgreen_vector_size(expectation->constraints); i++) {
-        Constraint *constraint = (Constraint *)cgreen_vector_get(expectation->constraints, i);
+        CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(expectation->constraints, i);
 
         if (constraint_is_not_for_parameter(constraint, parameter)) {
             continue;
@@ -792,7 +792,7 @@ static void apply_any_content_setting_parameter_constraints(RecordedExpectation 
 static CgreenValue stored_result_or_default_for(CgreenVector* constraints) {
     int i;
     for (i = 0; i < cgreen_vector_size(constraints); i++) {
-        Constraint *constraint = (Constraint *)cgreen_vector_get(constraints, i);
+        CGreenConstraint *constraint = (CGreenConstraint *)cgreen_vector_get(constraints, i);
 
         if (constraint->type == RETURN_VALUE) {
             return constraint->expected_value;

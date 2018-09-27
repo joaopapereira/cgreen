@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 
-Constraint static_is_non_null_constraint = {
+CGreenConstraint static_is_non_null_constraint = {
     /* .type */ VALUE_COMPARER,
     /* .name */ "be non null",
     /* .destroy */ destroy_static_constraint,
@@ -23,7 +23,7 @@ Constraint static_is_non_null_constraint = {
     /* .size_of_stored_value */ 0
 };
 
-Constraint static_is_null_constraint = {
+CGreenConstraint static_is_null_constraint = {
     /* .type */ VALUE_COMPARER,
     /* .name */ "be null",
     /* .destroy */ destroy_static_constraint,
@@ -40,7 +40,7 @@ Constraint static_is_null_constraint = {
     /* .size_of_stored_value */ 0
 };
 
-Constraint static_is_false_constraint = {
+CGreenConstraint static_is_false_constraint = {
     /* .type */ VALUE_COMPARER,
     /* .name */ "be false",
     /* .destroy */ destroy_static_constraint,
@@ -57,7 +57,7 @@ Constraint static_is_false_constraint = {
     /* .size_of_stored_value */ 0
 };
 
-Constraint static_is_true_constraint = {
+CGreenConstraint static_is_true_constraint = {
     /* .type */ VALUE_COMPARER,
     /* .name */ "be true",
     /* .destroy */ destroy_static_constraint,
@@ -74,9 +74,9 @@ Constraint static_is_true_constraint = {
     /* .size_of_stored_value */ 0
 };
 
-Constraint *is_non_null = &static_is_non_null_constraint;
-Constraint *is_null = &static_is_null_constraint;
-Constraint *is_false = &static_is_false_constraint;
-Constraint *is_true = &static_is_true_constraint;
+CGreenConstraint *is_non_null = &static_is_non_null_constraint;
+CGreenConstraint *is_null = &static_is_null_constraint;
+CGreenConstraint *is_false = &static_is_false_constraint;
+CGreenConstraint *is_true = &static_is_true_constraint;
 
 /* vim: set ts=4 sw=4 et cindent: */

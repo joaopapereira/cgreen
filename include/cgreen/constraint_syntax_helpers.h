@@ -56,18 +56,18 @@ extern "C" {
  * macros when practical, for the namespacing and confusing symbol
  * collision issues, so we use singleton instances.
  */
-extern Constraint static_non_null_constraint;
-extern Constraint *is_non_null;
+extern CGreenConstraint static_non_null_constraint;
+extern CGreenConstraint *is_non_null;
 #define is_not_null (is_non_null)
 
-extern Constraint static_null_constraint;
-extern Constraint *is_null;
+extern CGreenConstraint static_null_constraint;
+extern CGreenConstraint *is_null;
 
-extern Constraint static_false_constraint;
-extern Constraint *is_false;
+extern CGreenConstraint static_false_constraint;
+extern CGreenConstraint *is_false;
 
-extern Constraint static_true_constraint;
-extern Constraint *is_true;
+extern CGreenConstraint static_true_constraint;
+extern CGreenConstraint *is_true;
 
 #ifdef __cplusplus
 }
