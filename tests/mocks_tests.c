@@ -347,6 +347,26 @@ Ensure(Mocks, can_mock_a_function_macro) {
 
 #undef FUNCTION_MACRO
 
+static int sideeffect_changed = 1;
+static int mock_with_sideeffect(void) {
+    return (int)mock();
+}
+static void the_sideeffect(void * data) {
+	assert_that(*(int*)data, is_equal_to(99));
+    sideeffect_changed = 2;
+}
+
+Ensure(Mocks, mock_expect_with_sideeffect) {
+	int data_passed_to_sideeffect = 99;
+    expect(mock_with_sideeffect,
+           with_sideeffect(&the_sideeffect, &data_passed_to_sideeffect),
+           will_return(22));
+
+    assert_that(mock_with_sideeffect(), is_equal_to(22));
+
+    assert_that(sideeffect_changed, is_equal_to(2));
+}
+
 
 TestSuite *mock_tests(void) {
     TestSuite *suite = create_test_suite();
@@ -376,6 +396,7 @@ TestSuite *mock_tests(void) {
     add_test_with_context(suite, Mocks, can_stub_an_out_parameter);
     add_test_with_context(suite, Mocks, string_contains_expectation_is_confirmed);
     add_test_with_context(suite, Mocks, can_mock_a_function_macro);
+    add_test_with_context(suite, Mocks, mock_expect_with_sideeffect);
 
     return suite;
 }
